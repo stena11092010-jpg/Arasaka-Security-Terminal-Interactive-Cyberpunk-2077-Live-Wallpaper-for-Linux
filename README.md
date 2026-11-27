@@ -44,9 +44,9 @@
    [Install]
    WantedBy=multi-user.target
    ```
-   4. Press Ctrl + O
-      Enter
-      Ctrl + X
+   4. "Press Ctrl + O"
+      "Enter"
+      "Ctrl + X"
 ### 4. Set wallpaper in settings
   1) RMB on desktop >> "Desktop and wallpaper"
   2) Then use this settings: <img width="810" height="660" alt="image" src="https://github.com/user-attachments/assets/42ea9c6f-0358-42f9-a68c-05ded9249e93" />
