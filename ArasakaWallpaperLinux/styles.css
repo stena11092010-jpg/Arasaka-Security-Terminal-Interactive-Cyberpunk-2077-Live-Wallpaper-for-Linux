@@ -1,0 +1,222 @@
+:root {
+  --h: 356; /* оттенок интерфейса (меню настроек) */
+  --taskbar: 52px; /* высота панели задач Windows: увеличьте, если подвал всё ещё перекрыт */
+  --red: hsl(var(--h) 86% 45%); --hot: hsl(var(--h) 100% 58%); --bg: #050505;
+  --ink: #e8e8e8; --dim: #8a8a8a; --line: hsl(var(--h) 67% 17%);
+  --font: "Bahnschrift", "Segoe UI", "Yu Gothic UI", "Meiryo", "Noto Sans CJK JP", "DejaVu Sans", sans-serif;
+  --mono: "Cascadia Mono", "Consolas", monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); font: 13px/1.4 var(--font); cursor: default; }
+body {
+  display: grid; gap: 16px; padding: 18px 24px calc(var(--taskbar) + 10px);
+  grid-template-columns: minmax(260px, 23vw) 1fr minmax(260px, 23vw);
+  grid-template-rows: auto 1fr auto;
+  background: radial-gradient(ellipse at 50% 42%, hsl(var(--h) 80% 6%) 0, var(--bg) 70%);
+}
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.022) 0 1px, transparent 1px 3px); }
+.scan { position: fixed; left: 0; right: 0; top: -140px; height: 140px; pointer-events: none; background: linear-gradient(transparent, hsl(var(--h) 86% 45% / .07), transparent); animation: scan 9s linear infinite; }
+@keyframes scan { to { transform: translateY(calc(100vh + 280px)); } }
+
+/* header */
+.top { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 2px solid var(--red); }
+.logo { display: flex; align-items: center; gap: 16px; }
+.logo .k { font-size: 44px; font-weight: 700; color: var(--red); padding-right: 16px; border-right: 1px solid var(--line); }
+.logo b { display: block; font-size: 20px; letter-spacing: .28em; }
+.logo small, .now small { color: var(--dim); letter-spacing: .14em; font-size: 11px; }
+.now { text-align: right; }
+#clock { font: 700 36px var(--mono); color: var(--hot); font-variant-numeric: tabular-nums; }
+
+/* panels */
+.col { display: flex; flex-direction: column; gap: 16px; min-height: 0; }
+.panel { position: relative; padding: 12px 14px; border: 1px solid var(--line); background: hsl(var(--h) 86% 45% / .04); }
+.panel::before, .panel::after { content: ""; position: absolute; width: 12px; height: 12px; border: 0 solid var(--hot); }
+.panel::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+.panel::after { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+.grow { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+h2 { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; letter-spacing: .22em; color: var(--hot); padding-bottom: 6px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+h2 i { font-style: normal; font-weight: 400; letter-spacing: .1em; color: var(--dim); }
+.row { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; border-bottom: 1px dashed hsl(var(--h) 86% 45% / .16); }
+.row span:first-child { color: var(--dim); letter-spacing: .12em; font-size: 11px; }
+.row span:last-child { font-family: var(--mono); font-size: 12px; }
+.ok { color: var(--ink); font-weight: 700; }
+.bad { color: var(--hot); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.log { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; font: 11.5px/1.7 var(--mono); color: var(--dim); }
+.log .t { color: var(--line); filter: brightness(2.2); }
+.log .hl { color: var(--hot); }
+.log div:last-child { color: var(--ink); }
+
+/* center */
+.mid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; min-height: 0; }
+.emblem { position: relative; width: min(30vh, 280px); aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); }
+.emblem::before, .emblem::after { content: ""; position: absolute; width: 22px; height: 22px; border: 0 solid var(--hot); }
+.emblem::before { top: -1px; left: -1px; border-top-width: 3px; border-left-width: 3px; }
+.emblem::after { bottom: -1px; right: -1px; border-bottom-width: 3px; border-right-width: 3px; }
+.emblem span { font-size: min(14vh, 130px); font-weight: 700; color: var(--red); text-shadow: 0 0 28px hsl(var(--h) 86% 45% / .45); }
+.name { letter-spacing: .5em; padding-left: .5em; font-size: 15px; }
+.threat { text-align: center; }
+.threat small, .world small { display: block; color: var(--dim); letter-spacing: .16em; font-size: 11px; }
+.segs { display: flex; gap: 4px; margin: 6px 0; width: 240px; }
+.segs i { flex: 1; height: 8px; border: 1px solid var(--line); }
+.segs i.on { background: var(--red); border-color: var(--hot); box-shadow: 0 0 10px var(--red); }
+.threat b { font-size: 15px; letter-spacing: .3em; }
+.world { display: flex; gap: 36px; text-align: center; }
+.world b { font: 700 18px var(--mono); }
+
+/* footer */
+.foot { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; letter-spacing: .16em; }
+.foot .cur { margin-left: auto; }
+.foot .cur::after { content: "_"; color: var(--hot); animation: blink 1s steps(1) infinite; }
+.foot i { font-style: normal; color: var(--ink); }
+.haz { width: 120px; height: 10px; background: repeating-linear-gradient(-45deg, var(--red) 0 8px, #000 8px 16px); }
+.bar { width: 110px; height: 16px; background: repeating-linear-gradient(90deg, var(--red) 0 2px, transparent 2px 5px, var(--red) 5px 6px, transparent 6px 10px, var(--red) 10px 13px, transparent 13px 15px); }
+
+@media (max-width: 900px) {
+  html, body { overflow: auto; height: auto; }
+  body { grid-template-columns: 1fr; grid-template-rows: none; }
+  .mid { order: -1; }
+}
+
+/* ---------- v3: погода, нагрузка, календарь ---------- */
+.wx { display: flex; align-items: center; gap: 14px; padding: 4px 0 8px; }
+.wx b { font: 700 40px var(--mono); color: var(--hot); }
+.wx span { display: block; letter-spacing: .14em; }
+.wx small, .note { color: var(--dim); font-size: 11px; letter-spacing: .1em; }
+.days { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); text-align: center; }
+.days div { display: flex; flex-direction: column; gap: 2px; }
+.days small { color: var(--dim); font-size: 11px; letter-spacing: .1em; }
+.days b { font: 700 15px var(--mono); }
+.m { display: grid; grid-template-columns: 40px 1fr 48px; align-items: center; gap: 10px; padding: 5px 0; }
+.m span { color: var(--dim); font-size: 11px; letter-spacing: .12em; }
+.m em { height: 7px; border: 1px solid var(--line); }
+.m u { display: block; height: 100%; width: 0; background: var(--red); box-shadow: 0 0 8px var(--red); transition: width .6s; }
+.m b { text-align: right; font: 12px var(--mono); }
+.note { display: block; margin-top: 8px; }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center; font: 12px var(--mono); }
+.cal b { color: var(--dim); font-weight: 400; font-size: 10px; padding-bottom: 4px; }
+.cal span { padding: 4px 0; }
+.cal .today { background: var(--red); color: #fff; font-weight: 700; }
+.world { gap: 28px; }
+
+/* ---------- сейчас играет ---------- */
+.np { margin-top: auto; }
+.track { display: flex; align-items: center; gap: 12px; }
+.art { width: 68px; height: 68px; flex: none; display: grid; place-items: center; border: 1px solid var(--hot); color: var(--dim); font-size: 26px; background-size: cover; background-position: center; background-color: hsl(var(--h) 86% 45% / .06); }
+.tt { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.tt b { font-size: 14px; letter-spacing: .06em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tt span { color: var(--hot); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tt small { color: var(--dim); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---------- v4: анимация входа и интерактивность ---------- */
+.boot { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #050505; transition: opacity .6s; }
+.boot.off { opacity: 0; pointer-events: none; }
+.boot-in { width: min(520px, 86vw); }
+.boot-k { text-align: center; font-size: 96px; font-weight: 700; color: var(--red); text-shadow: 0 0 30px hsl(var(--h) 86% 45% / .5); animation: flick 2.4s steps(1) infinite; }
+@keyframes flick { 0%, 92%, 100% { opacity: 1; } 93% { opacity: .35; } 95% { opacity: 1; } 97% { opacity: .5; } }
+#bootLog { margin-top: 14px; min-height: 9em; font: 12.5px/1.8 var(--mono); color: var(--dim); white-space: pre; }
+.boot-bar { height: 6px; border: 1px solid var(--line); }
+#bootBar { display: block; height: 100%; width: 0; background: var(--red); box-shadow: 0 0 10px var(--red); transition: width .3s; }
+#bootOk { margin-top: 18px; text-align: center; font-size: 20px; letter-spacing: .5em; padding-left: .5em; color: var(--hot); opacity: 0; transform: scale(.9); transition: .25s; }
+#bootOk.on { opacity: 1; transform: none; }
+.fx { opacity: 0; transform: translateY(10px); transition: opacity .5s, transform .5s, border-color .2s, box-shadow .2s; }
+.fx.shown { opacity: 1; transform: none; }
+.panel { transition: border-color .2s, box-shadow .2s; }
+.panel:hover { border-color: var(--red); box-shadow: 0 0 18px hsl(var(--h) 86% 45% / .22); }
+.panel::before, .panel::after { transition: width .2s, height .2s; }
+.panel:hover::before, .panel:hover::after { width: 22px; height: 22px; }
+h2 { cursor: pointer; user-select: none; }
+h2:hover { color: #fff; }
+.panel.min > :not(h2) { display: none; }
+.panel.min h2 { margin-bottom: 0; padding-bottom: 0; border-bottom: 0; }
+.panel.min.grow { flex: none; }
+.emblem { cursor: pointer; transition: border-color .2s; }
+.emblem:hover { border-color: var(--hot); }
+.calnav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px; letter-spacing: .1em; }
+.calnav button { width: 28px; height: 22px; font: 16px/1 var(--mono); color: var(--hot); background: none; border: 1px solid var(--line); cursor: pointer; }
+.calnav button:hover { background: var(--red); color: #fff; }
+.calnav span { cursor: pointer; color: var(--dim); }
+.calnav span:hover { color: var(--ink); }
+.cal span[data-d] { cursor: pointer; border: 1px solid transparent; }
+.cal span[data-d]:hover { border-color: var(--red); }
+.cal .sel { border-color: var(--hot); box-shadow: inset 0 0 8px hsl(var(--h) 100% 58% / .5); }
+
+/* ---------- v5: окна, вкладки, графики ---------- */
+[hidden] { display: none !important; }
+.tabs { display: flex; gap: 6px; margin: 6px 0; }
+.tabs button, .fbtn { font: 11px var(--font); letter-spacing: .1em; color: var(--dim); background: none; border: 1px solid var(--line); padding: 3px 8px; cursor: pointer; }
+.tabs button:hover, .fbtn:hover { color: #fff; border-color: var(--hot); }
+.tabs button.on { color: #fff; border-color: var(--hot); background: hsl(var(--h) 86% 45% / .25); }
+.fbtn:disabled { opacity: .5; cursor: wait; }
+.spark { display: block; width: 100%; height: 40px; margin-top: 8px; border-top: 1px solid var(--line); }
+.spd { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; font: 12px var(--mono); }
+.m { cursor: pointer; }
+.m:hover em { border-color: var(--red); }
+.m.sel span { color: var(--hot); }
+.log.imp div:not(.imp) { display: none; }
+.track { cursor: pointer; }
+.hist { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); font: 11px/1.6 var(--mono); color: var(--dim); }
+h2 { touch-action: none; }
+.panel.drag { z-index: 60; box-shadow: 0 0 30px hsl(var(--h) 86% 45% / .4); }
+.panel.drag h2 { cursor: grabbing; }
+.foot .fbtn { margin-left: auto; }
+.foot .cur { margin-left: 0; }
+
+/* ---------- v6: плеер ---------- */
+.seek { display: flex; align-items: center; gap: 8px; margin-top: 10px; font: 11px var(--mono); color: var(--dim); }
+.seek em { flex: 1; height: 10px; border: 1px solid var(--line); cursor: pointer; }
+.seek em:hover { border-color: var(--red); }
+.seek u { display: block; height: 100%; width: 0; background: var(--red); box-shadow: 0 0 8px var(--red); }
+.seek.off, .ctl.off { opacity: .45; }
+.seek.off em { cursor: default; }
+.ctl { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+.ctl button { min-width: 54px; height: 28px; font: 12px var(--mono); color: var(--hot); background: none; border: 1px solid var(--line); cursor: pointer; }
+.ctl button:hover { background: var(--red); color: #fff; border-color: var(--hot); }
+#eq { display: block; width: 100%; height: 84px; margin-top: 10px; border-top: 1px solid var(--line); }
+.eqlab { display: flex; font-size: 10px; letter-spacing: .14em; color: var(--dim); }
+.eqlab span { text-align: center; }
+.eqlab span:nth-child(1) { width: 30%; } .eqlab span:nth-child(2) { width: 38%; } .eqlab span:nth-child(3) { width: 32%; }
+@media (max-height: 960px) { #eq { height: 64px; } .spark { height: 32px; } }
+
+/* ---------- v6.1: логотип в центре ---------- */
+.emblem img { width: 72%; height: 72%; object-fit: contain; filter: drop-shadow(0 0 18px hsl(var(--h) 86% 45% / .45)); }
+
+/* ---------- Arasaka OS: приложения / окна / питание ---------- */
+.ov { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; background: rgba(5,5,5,.94); }
+.ov-in { width: min(900px, 92vw); max-height: 86vh; display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid var(--line); }
+.ov-h { display: flex; align-items: center; gap: 12px; }
+.ov-h b { color: var(--hot); letter-spacing: .22em; font-size: 13px; }
+.ov-h input { flex: 1; padding: 6px 10px; color: var(--ink); background: none; border: 1px solid var(--line); font: 13px var(--font); }
+.ov-h input:focus { outline: none; border-color: var(--hot); }
+.ov-list, #ovWin { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; overflow: auto; }
+.ov-list { flex: 1; min-height: 0; }
+#ovWin small { grid-column: 1 / -1; color: var(--dim); letter-spacing: .14em; font-size: 10px; }
+.ov-list button, #ovWin button, .pwr button { padding: 8px 10px; text-align: left; font: 12px var(--font); color: var(--ink); background: none; border: 1px solid var(--line); cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ov-list button:hover, #ovWin button:hover, .pwr button:hover { border-color: var(--hot); background: hsl(var(--h) 86% 45% / .2); }
+.pwr { display: flex; justify-content: flex-end; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+.pwr button { text-align: center; color: var(--hot); letter-spacing: .1em; }
+.foot #bApps:not([hidden]) { margin-left: auto; }
+.foot #bApps:not([hidden]) + #resetWin { margin-left: 0; }
+
+.foot #bSet + #resetWin, .foot #bApps:not([hidden]) + #bSet { margin-left: 0; }
+
+/* ---------- меню настроек ---------- */
+body.no-lines::after { display: none; }
+body.no-scan .scan { display: none; }
+.st-body { display: flex; flex-direction: column; gap: 12px; overflow: auto; }
+.st-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.st-row > span:first-child { min-width: 150px; color: var(--dim); letter-spacing: .12em; font-size: 11px; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.seg button, .seg-b { padding: 5px 10px; font: 11px var(--font); letter-spacing: .08em; color: var(--dim); background: none; border: 1px solid var(--line); cursor: pointer; }
+.seg button:hover, .seg-b:hover { color: #fff; border-color: var(--hot); }
+.seg button.on { color: #fff; border-color: var(--hot); background: hsl(var(--h) 86% 45% / .25); }
+.seg button.sw { width: 26px; height: 26px; padding: 0; }
+.seg button.sw.on { outline: 2px solid #fff; }
+.st-row input[type=text], .st-row select { padding: 5px 8px; color: var(--ink); background: #050505; border: 1px solid var(--line); font: 12px var(--font); }
+.st-row input[type=range] { width: 160px; accent-color: var(--hot); }
+.st-row small { color: var(--dim); font-size: 11px; }
+
+/* Exact Arasaka corporate emblem: header + boot animation */
+.arasaka-mark { width: 48px; height: 48px; object-fit: contain; padding-right: 16px; border-right: 1px solid var(--line); flex: 0 0 auto; }
+.boot-mark { display: block; width: 112px; height: 112px; object-fit: contain; margin: 0 auto; filter: drop-shadow(0 0 18px rgba(212,16,30,.5)); animation: flick 2.4s steps(1) infinite; }
+.logo .k, .boot-k { display: none !important; }
