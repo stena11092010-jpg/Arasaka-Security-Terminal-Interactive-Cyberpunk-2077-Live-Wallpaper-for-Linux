@@ -3,17 +3,20 @@
 ### 1. Install Dependencies
 * **Fedora:**
   ```bash
-  sudo dnf install python3 python3-psutil playerctl chromium wmctrl
+  sudo dnf install python3 python3-psutil playerctl qt5-qtwebengine wmctrl
   ```
 * **Debian/Ubuntu:**
   ```bash
-  sudo apt update && sudo apt install -y python3 python3-psutil playerctl chromium wmctrl
+  sudo apt update && sudo apt install -y python3 python3-psutil playerctl libqt5webengine5 wmctrl
   ```
 * **Arch:**
   ```bash
-  sudo pacman -Syu python python-psutil playerctl chromium wmctrl
+  sudo pacman -Syu python python-psutil playerctl wmctrl
   ```
-
+  qt5 webengine was deleted from arch repos in 2025, so you need to install it from AUR (for example with yay)
+  ```bash
+  yay -S qt5-webengine
+  ```
 ### 2. Install "HTML Wallpaper" plugin for KDE Plasma(or use analog for your DE)
   <img width="937" height="261" alt="image" src="https://github.com/user-attachments/assets/b79ee22e-85a0-45ce-b987-a00c810a9473" />
 
