@@ -44,7 +44,7 @@
    [Install]
    WantedBy=multi-user.target
    ```
-   4. "Press Ctrl + O"
+   4. Press "Ctrl + O"
       "Enter"
       "Ctrl + X"
 ### 4. Set wallpaper in settings
