@@ -57,3 +57,5 @@
 ### 5. Done!
   <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/f7ba1018-c4c4-4215-927b-15dcdd9f0664" />
 
+## P.S.
+If you wanna use it on other DE, you can just add script to autostart and install address 127.0.0.1:5511 as a wallpaper .
