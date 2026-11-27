@@ -3,15 +3,15 @@
 ### 1. Install Dependencies
 * **Fedora:**
   ```bash
-  sudo dnf install python3 python3-psutil playerctl qt5-qtwebengine wmctrl
+  sudo dnf install python3 python3-psutil playerctl qt5-qtwebengine
   ```
 * **Debian/Ubuntu:**
   ```bash
-  sudo apt update && sudo apt install -y python3 python3-psutil playerctl libqt5webengine5 wmctrl
+  sudo apt update && sudo apt install -y python3 python3-psutil playerctl libqt5webengine5
   ```
 * **Arch:**
   ```bash
-  sudo pacman -Syu python python-psutil playerctl wmctrl
+  sudo pacman -Syu python python-psutil playerctl
   ```
   qt5 webengine was deleted from arch repos in 2025, so you need to install it from AUR (for example with yay)
   ```bash
