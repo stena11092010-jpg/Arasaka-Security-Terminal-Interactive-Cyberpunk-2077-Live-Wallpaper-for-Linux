@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARASAKA // Терминал</title>
+<link rel="stylesheet" href="styles.css?v=9">
+</head>
+<body>
+<div class="scan"></div>
+
+<header class="top">
+  <div class="logo"><img class="arasaka-mark" src="logo.svg" alt="Arasaka logo"><div><b>ARASAKA CORPORATION</b><small>ТЕРМИНАЛ БЕЗОПАСНОСТИ</small></div></div>
+  <div class="now"><div id="clock">--:--:--</div><small id="date">--</small></div>
+</header>
+
+<aside class="col">
+  <section class="panel">
+    <h2>ПОГОДА<i id="city">--</i></h2>
+    <div class="wx"><b id="wt">--°</b><div><span id="wd">ЗАГРУЗКА...</span><small id="wf"></small></div></div>
+    <div class="row"><span>ВЕТЕР</span><span id="ww">--</span></div>
+    <div class="row"><span>ВЛАЖНОСТЬ</span><span id="wh">--</span></div>
+    <div class="tabs"><button class="on" data-t="d">3 ДНЯ</button><button data-t="h">ПО ЧАСАМ</button></div>
+    <div class="days" id="days"></div>
+  </section>
+  <section class="panel">
+    <h2>НАГРУЗКА ПК</h2>
+    <div class="m sel" data-m="cpu"><span>ЦП</span><em><u id="cpuB"></u></em><b id="cpu">--</b></div>
+    <div class="m" data-m="gpu"><span>ГП</span><em><u id="gpuB"></u></em><b id="gpu">--</b></div>
+    <div class="m" data-m="ram"><span>ОЗУ</span><em><u id="ramB"></u></em><b id="ram">--</b></div>
+    <canvas class="spark" id="spLoad" width="240" height="40" title="График за последнюю минуту. Клик по строке выше выбирает ЦП, ГП или ОЗУ"></canvas>
+    <small class="note" id="sysnote">Данные ПК доступны при запуске в Lively Wallpaper</small>
+  </section>
+  <section class="panel np">
+    <h2>ПЛЕЕР</h2>
+    <div class="track" id="npTrack" title="Клик: история треков"><div class="art" id="art">♪</div><div class="tt"><b id="tt">НИЧЕГО НЕ ИГРАЕТ</b><span id="ta"></span><small id="tl"></small></div></div>
+    <div class="hist" id="thist" hidden></div>
+    <div class="seek off" id="seek"><span id="tpos">--:--</span><em id="seekBar" title="Клик: перемотка"><u id="seekFill"></u></em><span id="tdur">--:--</span></div>
+    <div class="ctl off" id="npCtl"><button id="bPrev" title="Предыдущий">◀◀</button><button id="bPlay" title="Пауза / играть">▶</button><button id="bNext" title="Следующий">▶▶</button></div>
+    <canvas id="eq" width="420" height="110"></canvas>
+    <div class="eqlab"><span>БАС</span><span>СРЕДНИЕ</span><span>ВЕРХА</span></div>
+    <small class="note" id="npnote"> </small>
+  </section>
+</aside>
+
+<main class="mid">
+  <div class="emblem" id="emblem" title="Клик: повторный вход"><img id="logo" src="logo.png" alt="Arasaka" onerror="this.onerror=null;this.src='logo.svg'"></div>
+  <div class="name">ARASAKA CORPORATION</div>
+  <div class="world" id="world"></div>
+</main>
+
+<aside class="col">
+  <section class="panel">
+    <h2>КАЛЕНДАРЬ<i id="calh">--</i></h2>
+    <div class="calnav"><button id="calPrev" title="Прошлый месяц">‹</button><span id="calSel" title="Сбросить на сегодня">СЕГОДНЯ</span><button id="calNext" title="Следующий месяц">›</button></div>
+    <div class="cal" id="cal"></div>
+  </section>
+  <section class="panel">
+    <h2>ИНТЕРНЕТ</h2>
+    <div class="row"><span>ДОСТУП</span><span id="inet">--</span></div>
+    <div class="row"><span>ПИНГ</span><span id="ping">--</span></div>
+    <div class="row"><span>СРЕДНИЙ / ДЖИТТЕР</span><span id="avg">--</span></div>
+    <div class="row"><span>СКОРОСТЬ ↓</span><span id="nd">—</span></div>
+    <div class="row"><span>СКОРОСТЬ ↑</span><span id="nu">—</span></div>
+    <div class="row"><span>КАНАЛ (ОЦЕНКА)</span><span id="ctype">--</span></div>
+    <canvas class="spark" id="spPing" width="240" height="40" title="Пинг за последние минуты"></canvas>
+    <div class="spd"><button id="spBtn" class="fbtn">ТЕСТ СКОРОСТИ</button><span id="spRes">НЕ ЗАПУСКАЛСЯ</span></div>
+  </section>
+  <section class="panel grow">
+    <h2>ЖУРНАЛ СОБЫТИЙ</h2>
+    <div class="tabs"><button class="on" data-f="all">ВСЕ</button><button data-f="imp">ВАЖНЫЕ</button><button id="logClr">ОЧИСТИТЬ</button></div>
+    <div class="log" id="log"></div>
+  </section>
+</aside>
+
+<footer class="foot">
+  <span class="haz"></span>
+  <span>ТОЛЬКО ДЛЯ УПОЛНОМОЧЕННОГО ПЕРСОНАЛА</span>
+  <span id="st">--</span>
+  <button class="fbtn" id="resetWin" title="Вернуть окна на место">СБРОС ОКОН</button>
+  <span class="cur">v6.1</span>
+  <span class="bar"></span>
+</footer>
+<div class="boot" id="boot">
+  <div class="boot-in">
+    <img class="boot-mark" src="logo.svg" alt="Arasaka logo">
+    <pre id="bootLog"></pre>
+    <div class="boot-bar"><span id="bootBar"></span></div>
+    <div id="bootOk">ДОСТУП РАЗРЕШЁН</div>
+  </div>
+</div>
+<script src="script.js?v=9"></script>
+</body>
+</html>
