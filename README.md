@@ -52,4 +52,5 @@
   2) Then use this settings: <img width="810" height="660" alt="image" src="https://github.com/user-attachments/assets/42ea9c6f-0358-42f9-a68c-05ded9249e93" />
   3) Reboot
 ### 5. Done!
-  <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/5968c595-0ff1-4c5d-a223-45c73196a755" />
+  <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/f7ba1018-c4c4-4215-927b-15dcdd9f0664" />
+
